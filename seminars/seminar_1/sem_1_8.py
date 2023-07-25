@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def base():
-    return render_template('base.html')
+    return render_template('base_8.html')
 
 
 @app.route('/about/')

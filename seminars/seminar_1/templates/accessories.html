@@ -1,0 +1,9 @@
+{% extends 'base_9.html' %}
+{% block content %}
+<span style="color:orange">Аксессуары</span>
+<ul >
+    {% for key, value in goods.items() %}
+    <li>Товар "{{ key }}" стоит {{ value }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

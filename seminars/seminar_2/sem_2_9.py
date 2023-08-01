@@ -7,3 +7,41 @@
 # ввода имени и электронной почты.
 
 
+from flask import Flask, request, render_template, make_response, redirect, url_for
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('name')
+        response = make_response(redirect(url_for('greetings', username=username)))
+        # создаём cookie
+        response.set_cookie('username', username)
+        response.set_cookie('email', request.form.get('email'))
+        return response
+    return render_template('index.html')
+
+
+@app.route('/greetings/')
+def greetings():
+    return render_template('greetings.html', username=request.args.get('username'))
+
+
+@app.route('/logout/')
+def logout():
+    response = make_response(render_template('index.html'))
+    # удаляем cookie
+    response.delete_cookie('username')
+    response.delete_cookie('email')
+    return response
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

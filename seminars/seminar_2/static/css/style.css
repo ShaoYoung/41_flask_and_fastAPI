@@ -1,0 +1,16 @@
+.button {
+    background-color: orange;
+    width: 150px;
+    height: 35px;
+    border: 2px solid royalblue;
+    color: darkblue;
+    font-weight: 600;
+    /*    эффект перехода для button*/
+    transition: all 0.4s 0.2s;
+}
+
+.button:hover {
+    background-color: darkblue;
+    color: orange;
+    border: 1px solid saddlebrown;
+}

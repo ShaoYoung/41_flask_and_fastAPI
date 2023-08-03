@@ -1,0 +1,63 @@
+# Flask-SQLAlchemy
+
+from flask import Flask
+from lectures.lecture_3_additional_features_flask.models_05 import db, User
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
+# инициализация БД
+db.init_app(app)
+
+
+@app.route('/')
+def index():
+    return 'Hi!'
+
+
+# в консоли flask init-db. создание БД
+@app.cli.command("init-db")
+def init_db():
+    # показать ошибку с неверным wsgi.py
+    # создать все таблицы
+    db.create_all()
+    print('OK')
+
+
+# в консоли flask add-john. можно через app.route
+@app.cli.command("add-john")
+def add_user():
+    # создаётся экземпляр класса User
+    user = User(username='john', email='john@example.com')
+    # добавляем экземпляр в БД (транзакция открыта, но не зафиксирована)
+    db.session.add(user)
+    # помещение строки в БД
+    db.session.commit()
+    print('John add in DB!')
+
+
+# в консоли flask edit-john. можно через app.route
+@app.cli.command("edit-john")
+def edit_user():
+    # создаём объект-запрос. фильтр по username='john'. найти первого
+    user = User.query.filter_by(username='john').first()
+    # присвоение нового значения email у объекта user
+    user.email = 'new_email@example.com'
+    # помещение строки в БД
+    db.session.commit()
+    print('Edit John mail in DB!')
+
+
+@app.cli.command("del-john")
+def del_user():
+    # создаём объект-запрос. фильтр по username='john'. найти первого
+    user = User.query.filter_by(username='john').first()
+    # удаление
+    db.session.delete(user)
+    # коммит
+    db.session.commit()
+    print('Delete John from DB!')
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

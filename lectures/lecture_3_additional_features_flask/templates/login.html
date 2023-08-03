@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Login</h1>
+    <form method="POST" action="{{ url_for('login') }}">
+<!--        передаём в форму token-->
+        {{ form.csrf_token }}
+        <p>
+<!--            вывод метки-->
+            {{ form.username.label }}<br>
+<!--            вывод поля ввода-->
+            {{ form.username(size=32) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>
+<!--            кнопка-->
+            <input type="submit" value="Login">
+        </p>
+    </form>
+{% endblock %}

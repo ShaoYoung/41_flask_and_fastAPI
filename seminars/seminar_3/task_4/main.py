@@ -47,13 +47,13 @@ def register():
         if existing_user:
             error_msg = 'Username or email already exists.'
             form.name.errors.append(error_msg)
-            return render_template('register.html', form=form)
+            return render_template('form.html', form=form)
 
         user = User(name=name, email=email, password=password)
         db.session.add(user)
         db.session.commit()
         return 'Registered success!'
-    return render_template('register.html', form=form)
+    return render_template('form.html', form=form)
 
 
 

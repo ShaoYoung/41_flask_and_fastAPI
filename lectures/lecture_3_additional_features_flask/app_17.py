@@ -36,7 +36,7 @@ def register():
         password = form.password.data
         print(email, password)
     ...
-    return render_template('register.html', form=form)
+    return render_template('form.html', form=form)
 
 
 

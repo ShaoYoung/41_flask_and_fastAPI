@@ -1,6 +1,6 @@
 # Модели
 from flask_sqlalchemy import SQLAlchemy
-
+from werkzeug.security import generate_password_hash, check_password_hash
 # создаётся экземпляр
 db = SQLAlchemy()
 
@@ -12,5 +12,9 @@ class User(db.Model):
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.String(), nullable=False)
 
-
+    # лучше сделать отдельные методы у класса
+    # def set_password(self, password):
+    #     self.password = generate_password_hash()
+    # def check_password(self, password):
+# НЕ ДОПИСАНО !!!
 

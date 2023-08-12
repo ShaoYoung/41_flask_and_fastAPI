@@ -1,0 +1,21 @@
+.columns_name {
+    color: brown;
+    font-weight: 300;
+    font-size: 200%;
+    text-align: center;
+    border: 2px solid grey
+}
+
+.table_style {
+/*   убираем пустые промежутки между ячейками*/
+   border-collapse: collapse;
+/*   устанавливаем для таблицы внешнюю границу серого цвета толщиной 2px*/
+   border: 2px solid grey;
+}
+
+.cell {
+/*   устанавливаем для ячейки границы толщиной 1px*/
+   border: 1px solid grey;
+   font-size: 150%;
+}
+

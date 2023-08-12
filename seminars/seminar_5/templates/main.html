@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <!--    <link rel="stylesheet" href="../static/styles.css">-->
+    <!--    Подключение css не работает ?!?-->
+</head>
+<body>
+<h1>{{ title }}</h1>
+
+<!--<table class="table_style">-->
+<!--    <tr>-->
+<!--        <td class="columns_name">id</td>-->
+<!--        <td class="columns_name">name</td>-->
+<!--        <td class="columns_name">email</td>-->
+<!--        <td class="columns_name">password</td>-->
+<!--    </tr>-->
+<!--    {% for user in users %}-->
+<!--    <tr>-->
+<!--        <td class="cell">{{ user.id }}</td>-->
+<!--        <td class="cell">{{ user.name }}</td>-->
+<!--        <td class="cell">{{ user.email }}</td>-->
+<!--        <td class="cell">{{ user.password }}</td>-->
+<!--    </tr>-->
+<!--    {% endfor %}-->
+<!--</table>-->
+
+<!--Т.к. пока без style.css, пишем стили прямо в тегах-->
+<table style="border-collapse: collapse; border: 2px solid grey">
+    <tr>
+        <td style="border: 2px solid grey">id</td>
+        <td style="border: 2px solid grey">name</td>
+        <td style="border: 2px solid grey">email</td>
+        <td style="border: 2px solid grey">password</td>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td style="border: 1px solid grey">{{ user.id }}</td>
+        <td style="border: 1px solid grey">{{ user.name }}</td>
+        <td style="border: 1px solid grey">{{ user.email }}</td>
+        <td style="border: 1px solid grey">{{ user.password }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<form action="/add_new_user" method="post">
+    <input type="text" name="name" placeholder="name">
+    <input type="email" name="email" placeholder="email">
+    <input type="password" name="password" placeholder="password">
+    <br>
+    <input class="button" type="submit" value="Добавить нового пользователя">
+</form>
+
+
+</body>
+</html>

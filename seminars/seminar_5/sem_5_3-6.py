@@ -28,8 +28,10 @@ import uvicorn
 from fastapi import HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from starlette.staticfiles import StaticFiles
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
@@ -64,14 +66,16 @@ async def get_html(request: Request):
     return templates.TemplateResponse('main.html', {'request': request, 'title': title, 'users': users})
 
 
-@app.post('/add_new_user/', summary='Добавить нового пользователя (форма)', tags=['Добавить'])
+@app.post('/get_html', summary='Добавить нового пользователя (форма)', tags=['Добавить'])
 async def add_new_user(request: Request, name=Form(), email=Form(), password=Form()):
-    user = User
-    user.id = len(users) + 1
-    user.name = name
-    user.email = email
-    user.password = password
-    users.append(user)
+    users.append(
+        User(
+            id=len(users) + 1,
+            name=name,
+            email=email,
+            password=password
+        )
+    )
     title = 'Список пользователей'
     return templates.TemplateResponse('main.html', {'request': request, 'title': title, 'users': users})
 
